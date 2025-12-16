@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akanksha Singh | Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="terminal-container">
+        <!-- Terminal Header -->
+        <div class="terminal-header">
+            <div class="terminal-controls">
+                <span class="control close"></span>
+                <span class="control minimize"></span>
+                <span class="control maximize"></span>
+            </div>
+            <div class="terminal-title">akanksha@portfolio:~$</div>
+        </div>
+
+        <!-- Terminal Body -->
+        <div class="terminal-body">
+            <!-- Welcome Screen -->
+            <div id="welcome-screen" class="screen active">
+                <div class="terminal-line">
+                    <span class="prompt">akanksha@portfolio:~$</span>
+                    <span class="command">cat welcome.txt</span>
+                </div>
+                <div class="output">
+                    <pre class="ascii-art">
+██╗  ██╗ █████╗ ██╗   ██╗██╗  ██╗██╗   ██╗███████╗
+██║  ██║██╔══██╗██║   ██║██║ ██╔╝██║   ██║██╔════╝
+███████║███████║██║   ██║█████╔╝ ██║   ██║███████╗
+██╔══██║██╔══██║╚██╗ ██╔╝██╔═██╗ ██║   ██║╚════██║
+██║  ██║██║  ██║ ╚████╔╝ ██║  ██╗╚██████╔╝███████║
+╚═╝  ╚═╝╚═╝  ╚═╝  ╚═══╝  ╚═╝  ╚═╝ ╚═════╝ ╚══════╝
+                    </pre>
+                    <p class="welcome-text">Welcome to my digital space!</p>
+                    <p class="welcome-subtext">Type <span class="highlight">help</span> to see available commands</p>
+                    <p class="welcome-subtext">Or click on the navigation menu above</p>
+                </div>
+                <div class="terminal-line">
+                    <span class="prompt">akanksha@portfolio:~$</span>
+                    <span class="cursor">█</span>
+                </div>
+            </div>
+
+            <!-- Navigation Menu -->
+            <nav class="terminal-nav">
+                <button class="nav-btn active" data-section="about">about</button>
+                <button class="nav-btn" data-section="experience">experience</button>
+                <button class="nav-btn" data-section="projects">projects</button>
+                <button class="nav-btn" data-section="skills">skills</button>
+                <button class="nav-btn" data-section="gallery">gallery</button>
+                <button class="nav-btn" data-section="contact">contact</button>
+            </nav>
+
+            <!-- About Section -->
+            <div id="about" class="screen">
+                <div class="terminal-line">
+                    <span class="prompt">akanksha@portfolio:~$</span>
+                    <span class="command">cat about.txt</span>
+                </div>
+                <div class="output">
+                    <div class="content-grid">
+                        <div class="profile-section">
+                            <div class="profile-image">
+                                <div class="profile-placeholder">
+                                    <span>AS</span>
+                                </div>
+                            </div>
+                            <h2 class="section-title">Akanksha Singh</h2>
+                            <p class="role">Software Developer – Backend</p>
+                            <div class="location">
+                                <span class="icon">📍</span>
+                                <span>Bengaluru, Karnataka, India</span>
+                            </div>
+                        </div>
+                        <div class="bio-section">
+                            <h3>About Me</h3>
+                            <p>I'm a passionate Software Developer specializing in backend systems, microservices architecture, and distributed systems. Currently building scalable solutions at Gray Frost Pvt. Ltd., with experience in Java/Spring Boot, Kafka, and cloud-native technologies.</p>
+                            <p>I have a strong foundation in Mathematics and Computing, with hands-on experience in Machine Learning, Generative AI, and RAG systems. I enjoy solving complex problems and building systems that scale.</p>
+                        </div>
+                    </div>
+                    <div class="education-section">
+                        <h3>Education</h3>
+                        <div class="education-item">
+                            <div class="edu-header">
+                                <span class="edu-degree">Integrated MS in Mathematics and Computing</span>
+                                <span class="edu-cgpa">CGPA: 8.44</span>
+                            </div>
+                            <div class="edu-details">
+                                <span class="edu-institution">Birla Institute of Technology, Mesra</span>
+                                <span class="edu-location">Ranchi, Jharkhand</span>
+                                <span class="edu-date">Jul. 2019 – May 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="terminal-line">
+                    <span class="prompt">akanksha@portfolio:~$</span>
+                    <span class="cursor">█</span>
+                </div>
+            </div>
+
+            <!-- Experience Section -->
+            <div id="experience" class="screen">
+                <div class="terminal-line">
+                    <span class="prompt">akanksha@portfolio:~$</span>
+                    <span class="command">cat experience.log</span>
+                </div>
+                <div class="output">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <div class="job-header">
+                                    <h3>Software Developer – Backend</h3>
+                                    <span class="company">Gray Frost Pvt. Ltd.</span>
+                                    <span class="date">Aug 2024 – Present</span>
+                                </div>
+                                <div class="job-location">📍 Bengaluru, Karnataka</div>
+                                <ul class="job-achievements">
+                                    <li>Built Java/Spring Boot microservices for subscriptions & invoicing with proration previews and <span class="highlight">HMAC-idempotent</span> payment webhooks; helped maintain p95 <span class="highlight">400-500 ms</span> at <span class="highlight">99.9%</span> availability.</li>
+                                    <li>Implemented <span class="highlight">CQRS reservations</span> (MySQL writes, Mongo reads) with <span class="highlight">row locks/unique indexes</span> and <span class="highlight">Redis</span> availability cache; eliminated double-booking and cut p99 lookups to <span class="highlight">150-200 ms</span>.</li>
+                                    <li>Introduced <span class="highlight">Kafka</span> producers for templated email events; shipped <span class="highlight">versioned/i18n</span> templates, tenant quotas & rate limits, and <span class="highlight">DLQ/replay</span> with <span class="highlight">Resilience4j</span> for reliable multi-tenant delivery.</li>
+                                    <li>Consolidated <span class="highlight">OpenTelemetry (OTel) tracing</span> with structured logs and <span class="highlight">golden unit tests</span> (Testcontainers) for end-to-end failure tracing and to guard billing/invoice regressions across services.</li>
+                                    <li>Automated <span class="highlight">GitHub Actions</span> single-click deploys to Azure AKS with <span class="highlight">Docker+ Kubernetes</span>, wiring build→scan→push→rollout into one CI/CD flow for consistent, repeatable releases.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <div class="job-header">
+                                    <h3>Deep Learning Intern</h3>
+                                    <span class="company">Indraprastha Institute of Information Technology, Delhi</span>
+                                    <span class="date">Jan 2024 – Jul 2024</span>
+                                </div>
+                                <div class="job-location">📍 New Delhi</div>
+                                <ul class="job-achievements">
+                                    <li>Modularized the <span class="highlight">ASR→MT→TTS pipeline</span> in <span class="highlight">Python/PyTorch</span> (Whisper, FastSpeech2, HiFi-GAN) with stage interfaces & JSON contracts; enabled one-command full/per-stage runs via <span class="highlight">Hydra</span>.</li>
+                                    <li>Shipped a reproducible <span class="highlight">ETL library</span> (torchaudio, NumPy, pandas) with <span class="highlight">resumable checkpoints & batched retries</span>; codified datasets as <span class="highlight">DVC pipelines</span> and tracked runs in <span class="highlight">MLflow</span> for <span class="highlight">3× throughput</span>.</li>
+                                    <li>Built an evaluation harness (WER, MOSNet, STOI) with golden samples & structured logs; tuned with AMP, SpecAugment, speed perturbation to deliver <span class="highlight">15% relative WER improvement</span> and stable demos.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <div class="job-header">
+                                    <h3>Software Engineering Intern</h3>
+                                    <span class="company">Google</span>
+                                    <span class="date">Jun 2023 – Aug 2023</span>
+                                </div>
+                                <div class="job-location">📍 Hyderabad, India</div>
+                                <ul class="job-achievements">
+                                    <li>Developed a custom <span class="highlight">Taxonomy Manager</span> using <span class="highlight">Java</span> and <span class="highlight">Golang</span> for a dynamic rules engine, migrating from a legacy <span class="highlight">Excel-based</span> architecture to a centralized platform ensuring data consistency and scalability.</li>
+                                    <li>Engineered a generic management interface to replace manual query-based ingestion, standardizing rule structures to eliminate spreadsheet dependencies while reducing configuration errors and administrative toil.</li>
+                                    <li>Optimized rule propagation to be <span class="highlight">instantaneous</span> by refactoring the ingestion pipeline, removing data lags to enable <span class="highlight">real-time updates</span> for critical business rules and ensuring availability for downstream consumers.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="terminal-line">
+                    <span class="prompt">akanksha@portfolio:~$</span>
+                    <span class="cursor">█</span>
+                </div>
+            </div>
+
+            <!-- Projects Section -->
+            <div id="projects" class="screen">
+                <div class="terminal-line">
+                    <span class="prompt">akanksha@portfolio:~$</span>
+                    <span class="command">ls -la projects/</span>
+                </div>
+                <div class="output">
+                    <div class="projects-grid">
+                        <div class="project-card" data-link="https://github.com/aks-akanksha/adapter-based-fine-tuning-for-RAG">
+                            <div class="project-header">
+                                <h3>Automated PEFT Benchmarking Framework for RAG</h3>
+                                <span class="project-badge">Featured</span>
+                            </div>
+                            <p class="project-description">Config-driven framework to benchmark <span class="highlight">LoRA vs. full fine-tuning</span> with <span class="highlight">4-bit quantization</span>; automated training/eval and visualized latency vs. quality vs. params trade-offs.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Transformers</span>
+                                <span class="tech-tag">Hugging Face</span>
+                                <span class="tech-tag">FAISS</span>
+                            </div>
+                            <div class="project-link">View on GitHub →</div>
+                        </div>
+
+                        <div class="project-card" data-link="https://github.com/aks-akanksha">
+                            <div class="project-header">
+                                <h3>Time-Locked Release Service</h3>
+                                <span class="project-badge">Production</span>
+                            </div>
+                            <p class="project-description">Time-locked data release (Draft→Scheduled→Approved→Executed) with <span class="highlight">JWT RBAC</span>, scheduled executors+webhooks, tamper-proof audit logs; Dockerized with Flyway migrations and OpenAPI.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Spring Boot 3.3</span>
+                                <span class="tech-tag">Java 21</span>
+                                <span class="tech-tag">MySQL</span>
+                                <span class="tech-tag">Docker</span>
+                                <span class="tech-tag">React</span>
+                            </div>
+                            <div class="project-link">View Details →</div>
+                        </div>
+
+                        <div class="project-card" data-link="https://github.com/aks-akanksha/jigsaw-toxic-comment-classification">
+                            <div class="project-header">
+                                <h3>Jigsaw Toxic Comment Classification</h3>
+                                <span class="project-badge">ML</span>
+                            </div>
+                            <p class="project-description">Machine learning project for classifying toxic comments using NLP techniques and deep learning models.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">NLP</span>
+                                <span class="tech-tag">Deep Learning</span>
+                                <span class="tech-tag">Jupyter</span>
+                            </div>
+                            <div class="project-link">View on GitHub →</div>
+                        </div>
+
+                        <div class="project-card" data-link="https://github.com/aks-akanksha/simpsons-gan-rl">
+                            <div class="project-header">
+                                <h3>Simpsons GAN with RL</h3>
+                                <span class="project-badge">Research</span>
+                            </div>
+                            <p class="project-description">Generative Adversarial Network combined with Reinforcement Learning for generating Simpsons character images.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">PyTorch</span>
+                                <span class="tech-tag">GAN</span>
+                                <span class="tech-tag">RL</span>
+                            </div>
+                            <div class="project-link">View on GitHub →</div>
+                        </div>
+
+                        <div class="project-card" data-link="https://github.com/aks-akanksha/Wellness-Junction">
+                            <div class="project-header">
+                                <h3>Wellness Junction</h3>
+                                <span class="project-badge">Full Stack</span>
+                            </div>
+                            <p class="project-description">Full-stack wellness application built with modern web technologies.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">Node.js</span>
+                            </div>
+                            <div class="project-link">View on GitHub →</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="terminal-line">
+                    <span class="prompt">akanksha@portfolio:~$</span>
+                    <span class="cursor">█</span>
+                </div>
+            </div>
+
+            <!-- Skills Section -->
+            <div id="skills" class="screen">
+                <div class="terminal-line">
+                    <span class="prompt">akanksha@portfolio:~$</span>
+                    <span class="command">cat skills.txt</span>
+                </div>
+                <div class="output">
+                    <div class="skills-container">
+                        <div class="skill-category">
+                            <h3>Programming Languages</h3>
+                            <div class="skill-items">
+                                <span class="skill-item">Java</span>
+                                <span class="skill-item">Python</span>
+                                <span class="skill-item">C/C++</span>
+                                <span class="skill-item">SQL</span>
+                                <span class="skill-item">Bash</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h3>Frameworks & Technologies</h3>
+                            <div class="skill-items">
+                                <span class="skill-item">Spring Boot</span>
+                                <span class="skill-item">REST APIs</span>
+                                <span class="skill-item">Kafka</span>
+                                <span class="skill-item">Resilience4j</span>
+                                <span class="skill-item">OpenAPI</span>
+                                <span class="skill-item">Node.js</span>
+                                <span class="skill-item">React.js</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h3>Developer Tools</h3>
+                            <div class="skill-items">
+                                <span class="skill-item">Git</span>
+                                <span class="skill-item">GitHub</span>
+                                <span class="skill-item">Docker</span>
+                                <span class="skill-item">Kubernetes (AKS)</span>
+                                <span class="skill-item">GitHub Actions</span>
+                                <span class="skill-item">Azure Key Vault</span>
+                                <span class="skill-item">Azure APIM</span>
+                                <span class="skill-item">Azure Communication Services</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h3>Databases</h3>
+                            <div class="skill-items">
+                                <span class="skill-item">MySQL</span>
+                                <span class="skill-item">MongoDB</span>
+                                <span class="skill-item">Redis</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h3>Concepts & Domains</h3>
+                            <div class="skill-items">
+                                <span class="skill-item">OOPS</span>
+                                <span class="skill-item">DSA</span>
+                                <span class="skill-item">Databases</span>
+                                <span class="skill-item">Machine Learning</span>
+                                <span class="skill-item">Generative AI</span>
+                                <span class="skill-item">RAG</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="terminal-line">
+                    <span class="prompt">akanksha@portfolio:~$</span>
+                    <span class="cursor">█</span>
+                </div>
+            </div>
+
+            <!-- Gallery Section -->
+            <div id="gallery" class="screen">
+                <div class="terminal-line">
+                    <span class="prompt">akanksha@portfolio:~$</span>
+                    <span class="command">ls -R gallery/</span>
+                </div>
+                <div class="output">
+                    <div class="gallery-container">
+                        <div class="gallery-tabs">
+                            <button class="gallery-tab active" data-tab="photos">Photos</button>
+                            <button class="gallery-tab" data-tab="blogs">Blogs</button>
+                        </div>
+                        <div class="gallery-content">
+                            <div id="photos-tab" class="gallery-tab-content active">
+                                <div class="gallery-grid">
+                                    <div class="gallery-item placeholder">
+                                        <div class="gallery-placeholder">
+                                            <span class="icon">📸</span>
+                                            <p>Add your experience photos here</p>
+                                        </div>
+                                    </div>
+                                    <div class="gallery-item placeholder">
+                                        <div class="gallery-placeholder">
+                                            <span class="icon">📸</span>
+                                            <p>Add your experience photos here</p>
+                                        </div>
+                                    </div>
+                                    <div class="gallery-item placeholder">
+                                        <div class="gallery-placeholder">
+                                            <span class="icon">📸</span>
+                                            <p>Add your experience photos here</p>
+                                        </div>
+                                    </div>
+                                    <div class="gallery-item placeholder">
+                                        <div class="gallery-placeholder">
+                                            <span class="icon">📸</span>
+                                            <p>Add your experience photos here</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="blogs-tab" class="gallery-tab-content">
+                                <div class="blogs-list">
+                                    <div class="blog-item placeholder">
+                                        <div class="blog-placeholder">
+                                            <span class="icon">📝</span>
+                                            <h3>Coming Soon</h3>
+                                            <p>Your blog posts will appear here</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="terminal-line">
+                    <span class="prompt">akanksha@portfolio:~$</span>
+                    <span class="cursor">█</span>
+                </div>
+            </div>
+
+            <!-- Contact Section -->
+            <div id="contact" class="screen">
+                <div class="terminal-line">
+                    <span class="prompt">akanksha@portfolio:~$</span>
+                    <span class="command">cat contact.txt</span>
+                </div>
+                <div class="output">
+                    <div class="contact-container">
+                        <h2>Get in Touch</h2>
+                        <p class="contact-subtitle">Feel free to reach out for collaborations, opportunities, or just to say hello!</p>
+                        <div class="contact-links">
+                            <a href="mailto:aks.akanksha01@gmail.com" class="contact-link" data-link-type="email">
+                                <span class="contact-icon">✉️</span>
+                                <span class="contact-text">aks.akanksha01@gmail.com</span>
+                            </a>
+                            <a href="tel:+919939066492" class="contact-link" data-link-type="phone">
+                                <span class="contact-icon">📞</span>
+                                <span class="contact-text">+91-9939066492</span>
+                            </a>
+                            <a href="https://www.linkedin.com/in/singhakanksha01" target="_blank" class="contact-link" data-link-type="linkedin">
+                                <span class="contact-icon">💼</span>
+                                <span class="contact-text">LinkedIn: singhakanksha01</span>
+                            </a>
+                            <a href="https://github.com/aks-akanksha" target="_blank" class="contact-link" data-link-type="github">
+                                <span class="contact-icon">🐙</span>
+                                <span class="contact-text">GitHub: aks-akanksha</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="terminal-line">
+                    <span class="prompt">akanksha@portfolio:~$</span>
+                    <span class="cursor">█</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Command Input (Hidden by default, can be enabled) -->
+        <div class="command-input-container" id="command-input" style="display: none;">
+            <span class="prompt">akanksha@portfolio:~$</span>
+            <input type="text" class="command-input" id="terminal-input" autocomplete="off" spellcheck="false">
+        </div>
+    </div>
+
+    <!-- Analytics Script -->
+    <script src="analytics.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
