@@ -66,7 +66,7 @@ function initializeProjectCards() {
     });
 }
 
-// Gallery tabs
+// Gallery tabs and image loading
 function initializeGallery() {
     const galleryTabs = document.querySelectorAll('.gallery-tab');
     const galleryTabContents = document.querySelectorAll('.gallery-tab-content');
@@ -91,6 +91,53 @@ function initializeGallery() {
                 }
             }
         });
+    });
+    
+    // Load gallery images
+    loadGalleryImages();
+}
+
+// Function to load gallery images
+function loadGalleryImages() {
+    const galleryGrid = document.querySelector('#photos-tab .gallery-grid');
+    if (!galleryGrid) return;
+    
+    // List of gallery images - add your image filenames here
+    // Example: const galleryImages = ['image1.jpg', 'image2.jpg', 'image3.jpg'];
+    const galleryImages = [
+        // Add your gallery image filenames here
+        // Example: 'images/gallery/photo1.jpg',
+        // Example: 'images/gallery/photo2.jpg',
+    ];
+    
+    // If no images are defined, keep the placeholders
+    if (galleryImages.length === 0) {
+        return;
+    }
+    
+    // Clear placeholders and add images
+    galleryGrid.innerHTML = '';
+    
+    galleryImages.forEach(imagePath => {
+        const galleryItem = document.createElement('div');
+        galleryItem.className = 'gallery-item';
+        
+        const img = document.createElement('img');
+        img.src = imagePath;
+        img.alt = 'Gallery Image';
+        img.onerror = function() {
+            // If image fails to load, show placeholder
+            this.style.display = 'none';
+            galleryItem.innerHTML = `
+                <div class="gallery-placeholder">
+                    <span class="icon">📸</span>
+                    <p>Image not found</p>
+                </div>
+            `;
+        };
+        
+        galleryItem.appendChild(img);
+        galleryGrid.appendChild(galleryItem);
     });
 }
 
