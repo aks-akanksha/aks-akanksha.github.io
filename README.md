@@ -134,3 +134,4 @@ This portfolio is open source and available for personal use.
 
 Built with ❤️ using HTML, CSS, and JavaScript
 
+

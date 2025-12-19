@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeProjectCards();
     initializeGallery();
     initializeCommandInput();
+    initializeContactForm();
     
     // Track page view
     if (typeof trackPageView === 'function') {
@@ -194,7 +195,6 @@ Role: Software Developer – Backend
 Location: Bengaluru, Karnataka, India
 GitHub: aks-akanksha
 LinkedIn: singhakanksha01
-Email: aks.akanksha01@gmail.com
             </pre>
         `;
     }
@@ -275,4 +275,203 @@ document.querySelectorAll('.project-card, .timeline-item').forEach(item => {
     item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(item);
 });
+
+// ============================================
+// EMAILJS CONFIGURATION
+// ============================================
+// To enable email sending, follow these steps:
+// 1. Sign up at https://www.emailjs.com/ (free tier available)
+// 2. Create an email service (Gmail, Outlook, etc.)
+// 3. Create an email template with these variables:
+//    - {{message}}
+//    - {{visitor_email}}
+//    - {{visitor_phone}}
+// 4. Get your Service ID, Template ID, and Public Key
+// 5. Replace the values below with your credentials
+// ============================================
+const EMAILJS_CONFIG = {
+    enabled: true, // EmailJS is configured and enabled
+    serviceID: 'service_ybnmymb',
+    templateID: 'template_gjwds4l',
+    publicKey: 'PBb25GxukJr4gzV6H',
+    recipientEmail: 'aks.akanksha01@gmail.com' // Your email address
+};
+
+// Contact Button functionality
+function initializeContactForm() {
+    const contactBtn = document.getElementById('contact-me-btn');
+    const contactModal = document.getElementById('contact-modal');
+    const modalClose = document.getElementById('modal-close');
+    const modalForm = document.getElementById('contact-modal-form');
+    const contactMessage = document.getElementById('contact-message');
+    
+    if (!contactBtn || !contactModal) return;
+    
+    // Initialize EmailJS if configured
+    if (EMAILJS_CONFIG.enabled && typeof emailjs !== 'undefined') {
+        try {
+            emailjs.init(EMAILJS_CONFIG.publicKey);
+        } catch (error) {
+            console.warn('EmailJS initialization failed:', error);
+            EMAILJS_CONFIG.enabled = false;
+        }
+    }
+    
+    // Open modal when button is clicked
+    contactBtn.addEventListener('click', function() {
+        contactModal.classList.add('show');
+        // Focus on first input
+        setTimeout(() => {
+            const firstInput = modalForm.querySelector('textarea, input');
+            if (firstInput) firstInput.focus();
+        }, 100);
+    });
+    
+    // Close modal when X is clicked
+    if (modalClose) {
+        modalClose.addEventListener('click', function() {
+            contactModal.classList.remove('show');
+            modalForm.reset();
+            if (contactMessage) {
+                contactMessage.classList.remove('show', 'success', 'error');
+            }
+        });
+    }
+    
+    // Close modal when clicking outside
+    contactModal.addEventListener('click', function(e) {
+        if (e.target === contactModal) {
+            contactModal.classList.remove('show');
+            modalForm.reset();
+            if (contactMessage) {
+                contactMessage.classList.remove('show', 'success', 'error');
+            }
+        }
+    });
+    
+    // Handle form submission
+    if (modalForm) {
+        modalForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Hide previous messages
+            if (contactMessage) {
+                contactMessage.classList.remove('show', 'success', 'error');
+            }
+            
+            // Get form values
+            const message = document.getElementById('modal-message').value.trim();
+            const visitorEmail = document.getElementById('modal-email').value.trim();
+            const visitorPhone = document.getElementById('modal-phone').value.trim();
+            
+            // Validation
+            if (!message) {
+                if (contactMessage) {
+                    contactMessage.textContent = 'Please enter a message.';
+                    contactMessage.classList.add('show', 'error');
+                }
+                return;
+            }
+            
+            if (!visitorEmail && !visitorPhone) {
+                if (contactMessage) {
+                    contactMessage.textContent = 'Please provide at least your email or phone number.';
+                    contactMessage.classList.add('show', 'error');
+                }
+                return;
+            }
+            
+            // Disable submit button
+            const submitBtn = document.getElementById('modal-submit-btn');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnLoader = submitBtn.querySelector('.btn-loader');
+            submitBtn.disabled = true;
+            btnText.style.display = 'none';
+            btnLoader.style.display = 'inline';
+            
+            // Prepare email content
+            const subject = encodeURIComponent('Contact from Portfolio Website');
+            const emailBody = encodeURIComponent(
+                `Hello Akanksha,\n\n` +
+                `I would like to get in touch with you.\n\n` +
+                `Message:\n${message}\n\n` +
+                `My Contact Information:\n` +
+                `Email: ${visitorEmail || 'Not provided'}\n` +
+                `Phone: ${visitorPhone || 'Not provided'}\n\n` +
+                `Best regards`
+            );
+            
+            try {
+                // Try EmailJS first if enabled
+                if (EMAILJS_CONFIG.enabled && typeof emailjs !== 'undefined') {
+                    const templateParams = {
+                        message: message,
+                        visitor_email: visitorEmail || 'Not provided',
+                        visitor_phone: visitorPhone || 'Not provided',
+                        to_email: EMAILJS_CONFIG.recipientEmail
+                    };
+                    
+                    await emailjs.send(EMAILJS_CONFIG.serviceID, EMAILJS_CONFIG.templateID, templateParams);
+                    
+                    // Success
+                    if (contactMessage) {
+                        contactMessage.textContent = 'Message sent successfully! I\'ll get back to you soon.';
+                        contactMessage.classList.add('show', 'success');
+                    }
+                    
+                    // Close modal after a delay
+                    setTimeout(() => {
+                        contactModal.classList.remove('show');
+                        modalForm.reset();
+                    }, 2000);
+                    
+                    // Track success
+                    if (typeof trackEvent === 'function') {
+                        trackEvent('contact', 'form_submit', 'success');
+                    }
+                } else {
+                    // Use mailto link as fallback
+                    window.location.href = `mailto:${EMAILJS_CONFIG.recipientEmail}?subject=${subject}&body=${emailBody}`;
+                    
+                    if (contactMessage) {
+                        contactMessage.textContent = 'Opening your email client... Please send the email manually.';
+                        contactMessage.classList.add('show', 'success');
+                    }
+                    
+                    // Close modal after a delay
+                    setTimeout(() => {
+                        contactModal.classList.remove('show');
+                        modalForm.reset();
+                    }, 2000);
+                    
+                    // Track mailto usage
+                    if (typeof trackEvent === 'function') {
+                        trackEvent('contact', 'form_submit', 'mailto');
+                    }
+                }
+            } catch (error) {
+                console.error('Error sending email:', error);
+                
+                // Fallback to mailto on error
+                window.location.href = `mailto:${EMAILJS_CONFIG.recipientEmail}?subject=${subject}&body=${emailBody}`;
+                
+                if (contactMessage) {
+                    contactMessage.textContent = 'Email service unavailable. Opening your email client as fallback...';
+                    contactMessage.classList.add('show', 'error');
+                }
+                
+                // Track error
+                if (typeof trackEvent === 'function') {
+                    trackEvent('contact', 'form_submit', 'error');
+                }
+            } finally {
+                // Re-enable submit button
+                submitBtn.disabled = false;
+                btnText.style.display = 'inline';
+                btnLoader.style.display = 'none';
+            }
+        });
+    }
+}
+
 

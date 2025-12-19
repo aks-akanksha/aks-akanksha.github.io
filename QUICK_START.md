@@ -96,3 +96,4 @@ Edit `styles.css` and modify the CSS variables at the top:
 
 Your unique terminal-themed portfolio is ready! 🎊
 
+

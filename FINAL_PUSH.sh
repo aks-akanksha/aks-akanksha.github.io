@@ -34,3 +34,4 @@ else
     echo "3. SSH keys are configured: ssh -T git@github.com"
 fi
 
+
