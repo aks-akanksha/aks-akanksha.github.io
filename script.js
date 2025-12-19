@@ -102,12 +102,17 @@ function loadGalleryImages() {
     const galleryGrid = document.querySelector('#photos-tab .gallery-grid');
     if (!galleryGrid) return;
     
-    // List of gallery images - add your image filenames here
-    // Example: const galleryImages = ['image1.jpg', 'image2.jpg', 'image3.jpg'];
+    // List of gallery images - automatically loads all images from the gallery folder
     const galleryImages = [
-        // Add your gallery image filenames here
-        // Example: 'images/gallery/photo1.jpg',
-        // Example: 'images/gallery/photo2.jpg',
+        'images/gallery/Image 1.jpeg',
+        'images/gallery/Image 2.jpeg',
+        'images/gallery/Image 3.jpeg',
+        'images/gallery/Image 4.jpeg',
+        'images/gallery/Image 5.jpeg',
+        'images/gallery/Image 6.jpeg',
+        'images/gallery/Image 7.jpeg',
+        'images/gallery/Image 8.jpeg',
+        'images/gallery/Image 9.jpeg',
     ];
     
     // If no images are defined, keep the placeholders
@@ -125,6 +130,7 @@ function loadGalleryImages() {
         const img = document.createElement('img');
         img.src = imagePath;
         img.alt = 'Gallery Image';
+        img.loading = 'lazy'; // Lazy load images for better performance
         img.onerror = function() {
             // If image fails to load, show placeholder
             this.style.display = 'none';
