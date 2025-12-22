@@ -157,7 +157,7 @@
                                 <div class="job-header">
                                     <h3>Software Engineering Intern</h3>
                                     <span class="company">Google</span>
-                                    <span class="date">Jun 2023 – Aug 2023</span>
+                                    <span class="date">Jun 2023 – Jul 2023</span>
                                 </div>
                                 <div class="job-location">📍 Hyderabad, India</div>
                                 <ul class="job-achievements">
@@ -240,6 +240,21 @@
                                 <span class="tech-tag">PyTorch</span>
                                 <span class="tech-tag">GAN</span>
                                 <span class="tech-tag">RL</span>
+                            </div>
+                            <div class="project-link">View on GitHub →</div>
+                        </div>
+
+                        <div class="project-card" data-link="https://github.com/aks-akanksha/order-execution-engine">
+                            <div class="project-header">
+                                <h3>Order Execution Engine</h3>
+                                <span class="project-badge">Production</span>
+                            </div>
+                            <p class="project-description">Order execution engine with <span class="highlight">DEX routing</span> and <span class="highlight">WebSocket status updates</span> for real-time order tracking and decentralized exchange integration.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">TypeScript</span>
+                                <span class="tech-tag">WebSocket</span>
+                                <span class="tech-tag">DEX</span>
+                                <span class="tech-tag">Docker</span>
                             </div>
                             <div class="project-link">View on GitHub →</div>
                         </div>
@@ -421,19 +436,22 @@
                                     <h3>Get in Touch</h3>
                                     <button class="modal-close" id="modal-close">&times;</button>
                                 </div>
-                                <form id="contact-modal-form" class="contact-modal-form">
+                                <form id="contact-modal-form" class="contact-modal-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                                     <div class="form-group">
                                         <label for="modal-message">Message <span class="required">*</span></label>
                                         <textarea id="modal-message" name="message" rows="5" required placeholder="Type your message here..."></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="modal-email">Your Email</label>
-                                        <input type="email" id="modal-email" name="visitor_email" placeholder="your.email@example.com">
+                                        <input type="email" id="modal-email" name="email" placeholder="your.email@example.com">
                                     </div>
                                     <div class="form-group">
                                         <label for="modal-phone">Your Phone Number</label>
-                                        <input type="tel" id="modal-phone" name="visitor_phone" placeholder="+91-XXXXXXXXXX">
+                                        <input type="tel" id="modal-phone" name="phone" placeholder="+91-XXXXXXXXXX">
                                     </div>
+                                    <input type="hidden" name="_to" value="aks.akanksha01@gmail.com">
+                                    <input type="hidden" name="_subject" value="Contact from Portfolio Website">
+                                    <input type="hidden" name="_replyto" id="form-replyto" value="">
                                     <div class="form-note">
                                         <p>Please provide at least your email or phone number so I can get back to you.</p>
                                     </div>

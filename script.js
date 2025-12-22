@@ -330,9 +330,25 @@ document.querySelectorAll('.project-card, .timeline-item').forEach(item => {
 });
 
 // ============================================
-// EMAILJS CONFIGURATION
+// FORMSFREE CONFIGURATION (RECOMMENDED)
 // ============================================
-// To enable email sending, follow these steps:
+// To enable email sending via Formspree:
+// 1. Sign up at https://formspree.io/ (free tier available - 50 submissions/month)
+// 2. Create a new form
+// 3. Set the recipient email to: aks.akanksha01@gmail.com
+// 4. Get your form ID (looks like: xjvqkzpn)
+// 5. Replace "YOUR_FORM_ID" in index.html form action with your form ID
+// 6. The form will automatically send emails to aks.akanksha01@gmail.com
+// ============================================
+const FORMSFREE_CONFIG = {
+    enabled: true, // Set to false to use EmailJS fallback
+    recipientEmail: 'aks.akanksha01@gmail.com'
+};
+
+// ============================================
+// EMAILJS CONFIGURATION (FALLBACK)
+// ============================================
+// To enable email sending via EmailJS (fallback):
 // 1. Sign up at https://www.emailjs.com/ (free tier available)
 // 2. Create an email service (Gmail, Outlook, etc.)
 // 3. Create an email template with these variables:
@@ -343,11 +359,11 @@ document.querySelectorAll('.project-card, .timeline-item').forEach(item => {
 // 5. Replace the values below with your credentials
 // ============================================
 const EMAILJS_CONFIG = {
-    enabled: true, // EmailJS is configured and enabled
+    enabled: false, // Set to true to use EmailJS instead of Formspree
     serviceID: 'service_ybnmymb',
     templateID: 'template_gjwds4l',
     publicKey: 'PBb25GxukJr4gzV6H',
-    recipientEmail: 'aks.akanksha01@gmail.com' // Your email address
+    recipientEmail: 'aks.akanksha01@gmail.com'
 };
 
 // Contact Button functionality
@@ -360,7 +376,7 @@ function initializeContactForm() {
     
     if (!contactBtn || !contactModal) return;
     
-    // Initialize EmailJS if configured
+    // Initialize EmailJS if configured (fallback only)
     if (EMAILJS_CONFIG.enabled && typeof emailjs !== 'undefined') {
         try {
             emailjs.init(EMAILJS_CONFIG.publicKey);
@@ -368,6 +384,15 @@ function initializeContactForm() {
             console.warn('EmailJS initialization failed:', error);
             EMAILJS_CONFIG.enabled = false;
         }
+    }
+    
+    // Set up reply-to field for Formspree
+    const emailInput = document.getElementById('modal-email');
+    const replyToField = document.getElementById('form-replyto');
+    if (emailInput && replyToField) {
+        emailInput.addEventListener('input', function() {
+            replyToField.value = this.value;
+        });
     }
     
     // Open modal when button is clicked
@@ -442,7 +467,7 @@ function initializeContactForm() {
             btnText.style.display = 'none';
             btnLoader.style.display = 'inline';
             
-            // Prepare email content
+            // Prepare email content for fallback
             const subject = encodeURIComponent('Contact from Portfolio Website');
             const emailBody = encodeURIComponent(
                 `Hello Akanksha,\n\n` +
@@ -454,9 +479,52 @@ function initializeContactForm() {
                 `Best regards`
             );
             
+            // Check if Formspree is configured (check if form action contains a valid form ID)
+            const formAction = modalForm.getAttribute('action');
+            const isFormspreeConfigured = formAction && formAction.includes('formspree.io') && !formAction.includes('YOUR_FORM_ID');
+            
             try {
-                // Try EmailJS first if enabled
-                if (EMAILJS_CONFIG.enabled && typeof emailjs !== 'undefined') {
+                if (isFormspreeConfigured) {
+                    // Use Formspree (recommended method)
+                    // Formspree will handle the submission automatically via the form action
+                    // We'll intercept to show a success message
+                    
+                    // Submit the form normally - Formspree will handle it
+                    const formData = new FormData(modalForm);
+                    
+                    const response = await fetch(formAction, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        // Success
+                        if (contactMessage) {
+                            contactMessage.textContent = 'Message sent successfully! I\'ll get back to you soon.';
+                            contactMessage.classList.add('show', 'success');
+                        }
+                        
+                        // Close modal after a delay
+                        setTimeout(() => {
+                            contactModal.classList.remove('show');
+                            modalForm.reset();
+                            if (contactMessage) {
+                                contactMessage.classList.remove('show', 'success', 'error');
+                            }
+                        }, 2000);
+                        
+                        // Track success
+                        if (typeof trackEvent === 'function') {
+                            trackEvent('contact', 'form_submit', 'success_formspree');
+                        }
+                    } else {
+                        throw new Error('Formspree submission failed');
+                    }
+                } else if (EMAILJS_CONFIG.enabled && typeof emailjs !== 'undefined') {
+                    // Try EmailJS as fallback
                     const templateParams = {
                         message: message,
                         visitor_email: visitorEmail || 'Not provided',
@@ -476,15 +544,18 @@ function initializeContactForm() {
                     setTimeout(() => {
                         contactModal.classList.remove('show');
                         modalForm.reset();
+                        if (contactMessage) {
+                            contactMessage.classList.remove('show', 'success', 'error');
+                        }
                     }, 2000);
                     
                     // Track success
                     if (typeof trackEvent === 'function') {
-                        trackEvent('contact', 'form_submit', 'success');
+                        trackEvent('contact', 'form_submit', 'success_emailjs');
                     }
                 } else {
-                    // Use mailto link as fallback
-                    window.location.href = `mailto:${EMAILJS_CONFIG.recipientEmail}?subject=${subject}&body=${emailBody}`;
+                    // Use mailto link as final fallback
+                    window.location.href = `mailto:${FORMSFREE_CONFIG.recipientEmail}?subject=${subject}&body=${emailBody}`;
                     
                     if (contactMessage) {
                         contactMessage.textContent = 'Opening your email client... Please send the email manually.';
@@ -495,6 +566,9 @@ function initializeContactForm() {
                     setTimeout(() => {
                         contactModal.classList.remove('show');
                         modalForm.reset();
+                        if (contactMessage) {
+                            contactMessage.classList.remove('show', 'success', 'error');
+                        }
                     }, 2000);
                     
                     // Track mailto usage
@@ -506,7 +580,7 @@ function initializeContactForm() {
                 console.error('Error sending email:', error);
                 
                 // Fallback to mailto on error
-                window.location.href = `mailto:${EMAILJS_CONFIG.recipientEmail}?subject=${subject}&body=${emailBody}`;
+                window.location.href = `mailto:${FORMSFREE_CONFIG.recipientEmail}?subject=${subject}&body=${emailBody}`;
                 
                 if (contactMessage) {
                     contactMessage.textContent = 'Email service unavailable. Opening your email client as fallback...';
